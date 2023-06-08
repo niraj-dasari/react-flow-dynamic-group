@@ -18,7 +18,6 @@ export default () => {
             <br/>
             <div onDragStart={(event) => onDragStart(event, 'ResizableNode')} draggable>
                 <div className="dndnode group">
-                    <BsTriangle />
                 </div>
                 <p>Group</p>
             </div>

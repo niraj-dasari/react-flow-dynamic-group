@@ -9,6 +9,7 @@ const StaticNode = ({ data }) => {
             <div className="dndnode node">
                 <BsTriangle />
             </div>      
+            {/* <div>{data}</div> */}
             <Handle type="source" position={Position.Right} />
         </>
     );

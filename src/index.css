@@ -19,10 +19,9 @@
 .dndflow .dndnode {
   height: 40px;
   width: 40px;
-  padding: 4px;
   border: 1px solid #1a192b;
   border-radius: 2px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,11 +29,11 @@
 }
 
 .dndflow .dndnode.node {
-  border-color: #0041d0;
+  border-color: #000;
 }
 
 .dndflow .dndnode.group {
-  border-color: #ff0072;
+  border-color: #000;
 }
 
 .dndflow .reactflow-wrapper {

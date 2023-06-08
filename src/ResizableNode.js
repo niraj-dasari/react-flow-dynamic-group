@@ -6,7 +6,7 @@ const ResizableNode = ({ data }) => {
     <>
       <NodeResizer/>
       {/* <Handle type="target" position={Position.Left} /> */}
-      <div style={{ padding: 10 , height:'200px', width:'300px'}}></div>
+      <div style={{height:'200px', width:'300px'}}></div>
       {/* <Handle type="source" position={Position.Right} /> */}
     </>
   );
