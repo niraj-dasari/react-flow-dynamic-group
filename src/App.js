@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import ReactFlow, {
   ReactFlowProvider,
   addEdge,
@@ -43,12 +43,16 @@ const DnDFlow = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const {getIntersectingNodes}  = useReactFlow();
+  const [currentNode,setCurrentNode] = useState({});
+  const [pNode,setPNode] = useState({});
 
   const onNodeDrag = useCallback((event, node) => {
-    console.log(node);
+    console.log(node,nodes);
     const intersections = getIntersectingNodes(node).map((n) => n.id);
 
     console.log(intersections);
+    setCurrentNode(node);
+    setPNode(nodes.filter(n => n.type == 'ResizableNode')[0]);
     console.log(nodes.filter(n => n.type != 'ResizableNode')[0])
     const parent = nodes.filter(n => n.type == 'ResizableNode')[0].id.toString;
     // const child = nodes.filter(n => n.type != 'ResizableNode')[0];
@@ -122,14 +126,29 @@ const DnDFlow = () => {
         id: getId(),
         type,
         position,
-        data: { label: `${type} node` }
+        data: { label: `${type} node` },
+        parentNode: '',
+        extent: ''
       };
 
-      console.log(newNode)
+      // console.log(newNode)
       setNodes((nds) => nds.concat(newNode));
+      // console.log(nodes)
     },
     [reactFlowInstance]
   );
+
+  useEffect (()=>{
+    // setNodes(nodes.filter(n => n.id != currentNode.id));
+    console.log(currentNode);
+    const cnode = currentNode;
+    cnode.parentNode = pNode.id;
+    cnode.extent ='parent';
+    setCurrentNode(cnode)
+    setNodes([...nodes],currentNode);
+    console.log(nodes)
+  },[currentNode,pNode])
+
   return (
     <div style={{ width: '100vw', height: '100vh' }} className="dndflow">
       <Sidebar />
